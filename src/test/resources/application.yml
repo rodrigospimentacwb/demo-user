@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  jpa.properties.hibernate.show-sql: true
+
+jwt:
+  secret: "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcxNzEyMTk4NywiaWF0IjoxNzE3MTIxOTg3fQ.clgDS1QV58GlM6kHRL3gIoNVvISbPV7EEKnkoQWonz4"
+  expiration-millis: 3600000
+
+security:
+  permittedPaths:
+    - "/auth/**"
+  cors-allowed-origins:
+    - "http://localhost:8085"
+  cors-allowed-methods:
+    - "GET"
+    - "POST"
+  cors-allowed-headers:
+    - "Authorization"
+    - "Content-Type"
+  cors-allowed-paths:
+    - "/**"
+
+async-config:
+  thread-pool:
+    core-pool-size: 2
+    max-pool-size: 2
+    queue-capacity: 500
+    thread-name-prefix: "UserProjectAsyncThread-"
