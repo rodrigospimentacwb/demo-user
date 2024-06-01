@@ -7,7 +7,7 @@ import br.com.pepper.demouser.domains.auth.services.AuthService;
 import br.com.pepper.demouser.domains.auth.services.JWTService;
 import br.com.pepper.demouser.domains.users.controllers.dtos.UserDto;
 import br.com.pepper.demouser.domains.users.models.User;
-import br.com.pepper.demouser.domains.users.services.UserService;
+import br.com.pepper.demouser.domains.UserService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

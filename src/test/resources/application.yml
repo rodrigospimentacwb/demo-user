@@ -14,7 +14,7 @@ spring:
   jpa.properties.hibernate.show-sql: true
 
 jwt:
-  secret: "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcxNzEyMTk4NywiaWF0IjoxNzE3MTIxOTg3fQ.clgDS1QV58GlM6kHRL3gIoNVvISbPV7EEKnkoQWonz4"
+  secret: "5814616bfbdc942c74f1577984f0c45af4cc9e58f429fdba2b6b4b80a441eddc"
   expiration-millis: 3600000
 
 security:

@@ -1,5 +1,6 @@
-package br.com.pepper.demouser.domains.auth.controllers;
+package br.com.pepper.demouser.unit.tests.domains.auth.controllers;
 
+import br.com.pepper.demouser.domains.auth.controllers.AuthController;
 import br.com.pepper.demouser.domains.auth.controllers.dtos.LoginResponse;
 import br.com.pepper.demouser.domains.auth.controllers.dtos.SignInDto;
 import br.com.pepper.demouser.domains.auth.controllers.dtos.SignUpDto;
@@ -7,13 +8,11 @@ import br.com.pepper.demouser.domains.auth.services.AuthService;
 import br.com.pepper.demouser.domains.auth.services.JWTService;
 import br.com.pepper.demouser.domains.users.controllers.dtos.UserDto;
 import br.com.pepper.demouser.domains.users.models.User;
-import br.com.pepper.demouser.domains.users.services.UserService;
-import br.com.pepper.demouser.test.commons.AbstractTestUtils;
-import org.junit.jupiter.api.BeforeEach;
+import br.com.pepper.demouser.domains.UserService;
+import br.com.pepper.demouser.commons.AbstractUnitTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
@@ -21,7 +20,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class AuthControllerTest extends AbstractTestUtils {
+class AuthControllerTest extends AbstractUnitTest {
     @Mock
     private JWTService jwtService;
 
@@ -34,17 +33,11 @@ class AuthControllerTest extends AbstractTestUtils {
     @InjectMocks
     private AuthController authController;
 
-    private static final String MOCKED_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNzA3NzgxNywiZXhwIjoxNzE3MDgxNDE3fQ.yAkw495GS3vSNWhX8K1xN6c56CPEWDDmrfncGdSFGU0";
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
     void testAuthenticate() {
-        SignInDto signInDto = new SignInDto("jonny.silver@gmail.com", "Aa12345@");
-        User authenticatedUser = new User("Johnny Silverhand", "jonny.silver@gmail.com", "Aa12345@");
+        SignInDto signInDto = createSignInDto();
+        User authenticatedUser = createUser(1L);
+
         when(authService.authenticate(signInDto)).thenReturn(authenticatedUser);
         when(jwtService.generateToken(authenticatedUser)).thenReturn(MOCKED_TOKEN);
 
@@ -58,12 +51,11 @@ class AuthControllerTest extends AbstractTestUtils {
 
     @Test
     void testAddUser() {
-        SignUpDto signUpDto = new SignUpDto("Johnny Silverhand", "jonny.silver@gmail.com", "Aa12345@");
-        User registeredUser = new User("Johnny Silverhand", "jonny.silver@gmail.com", "Aa12345@");
-        forceValue(registeredUser, "id", 1L);
+        SignUpDto signUpDto = createSignUpDto();
+        User registeredUser = createUser(1L);
 
         when(userService.addUserAndNotify(signUpDto)).thenReturn(registeredUser);
-        when(userService.convertToDto(registeredUser)).thenReturn(new UserDto(1L, "Johnny Silverhand", "jonny.silver@gmail.com"));
+        when(userService.convertToDto(registeredUser)).thenReturn(createUserDto(1L));
 
         ResponseEntity<UserDto> responseEntity = authController.addUser(signUpDto);
 

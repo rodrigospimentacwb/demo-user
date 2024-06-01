@@ -1,13 +1,12 @@
-package br.com.pepper.demouser.domains.users.controllers;
+package br.com.pepper.demouser.unit.tests.domains.users.controllers;
 
+import br.com.pepper.demouser.commons.AbstractUnitTest;
+import br.com.pepper.demouser.domains.users.controllers.UserController;
 import br.com.pepper.demouser.domains.users.controllers.dtos.UserDto;
-import br.com.pepper.demouser.domains.users.services.UserService;
-import br.com.pepper.demouser.test.commons.AbstractTestUtils;
-import org.junit.jupiter.api.BeforeEach;
+import br.com.pepper.demouser.domains.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +17,12 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class UserControllerTest extends AbstractTestUtils {
+class UserControllerTest extends AbstractUnitTest {
     @Mock
     private UserService userService;
 
     @InjectMocks
     private UserController userController;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     void testGetUsers() {
@@ -44,7 +38,7 @@ class UserControllerTest extends AbstractTestUtils {
     @Test
     void testFindById() {
         Long userId = 1L;
-        UserDto userDto = new UserDto(userId, "Johnny Silverhand", "jonny.silver@gmail.com");
+        UserDto userDto = createUserDto(1L);
         when(userService.findById(userId)).thenReturn(userDto);
 
         ResponseEntity<UserDto> responseEntity = userController.findById(userId);

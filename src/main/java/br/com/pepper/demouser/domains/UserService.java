@@ -1,4 +1,4 @@
-package br.com.pepper.demouser.domains.users.services;
+package br.com.pepper.demouser.domains;
 
 import br.com.pepper.demouser.domains.application.handlers.CustomException;
 import br.com.pepper.demouser.domains.auth.controllers.dtos.SignUpDto;

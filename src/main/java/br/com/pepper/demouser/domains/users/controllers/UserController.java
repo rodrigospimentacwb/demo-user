@@ -1,7 +1,7 @@
 package br.com.pepper.demouser.domains.users.controllers;
 
 import br.com.pepper.demouser.domains.users.controllers.dtos.UserDto;
-import br.com.pepper.demouser.domains.users.services.UserService;
+import br.com.pepper.demouser.domains.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
